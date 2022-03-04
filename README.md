@@ -19,3 +19,23 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/becarios_bunsan_2022_b1>.
 
+
+
+c "./lib/word_count.ex"
+
+WordCount.count("./lib/mytext.txt")
+
+iex(44)> WordCount.count("./lib/mytext.txt")
+%{
+  "Agustin" => 1,
+  "Amir" => 1,
+  "Esto" => 2,
+  "como" => 1,
+  "dos" => 1,
+  "estan" => 1,
+  "hola" => 1,
+  "repite" => 1,
+  "se" => 1,
+  "veces" => 1,
+  "y" => 1
+}
