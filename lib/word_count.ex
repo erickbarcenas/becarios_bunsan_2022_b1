@@ -21,9 +21,6 @@ defmodule WordCount do
     |> Enum.map(fn word-> clean(word) end)
     |> List.flatten()
     |> Enum.reduce(%{}, fn x, acc -> Map.update(acc, x, 1, &(&1 + 1)) end)
-    #|> String.split(~r{(\\n|[^\w'])+})
-    #|> Enum.filter(fn x -> x != "" end)
-    #|> Enum.count() |> IO.puts()
   end
 
   def count(filename) do

@@ -20,11 +20,17 @@ and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/becarios_bunsan_2022_b1>.
 
 
+## Modules
 
+### WordCount
+
+compile the program
+```
 c "./lib/word_count.ex"
+```
+### How to use the function?
 
-WordCount.count("./lib/mytext.txt")
-
+```elixir
 iex(44)> WordCount.count("./lib/mytext.txt")
 %{
   "Agustin" => 1,
@@ -39,3 +45,4 @@ iex(44)> WordCount.count("./lib/mytext.txt")
   "veces" => 1,
   "y" => 1
 }
+```
