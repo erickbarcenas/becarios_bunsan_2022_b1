@@ -31,11 +31,9 @@ c "./lib/word_count.ex"
 ### How to use the function?
 
 ```elixir
-iex(44)> WordCount.count("./lib/mytext.txt")
+iex(44)> WordCount.count("./data/word_count/mytext.txt")
 %{
-  "Agustin" => 1,
-  "Amir" => 1,
-  "Esto" => 2,
+  "esto" => 2,
   "como" => 1,
   "dos" => 1,
   "estan" => 1,
