@@ -15,3 +15,4 @@ defmodule WordCountTest do
     }
   end
 end
+
