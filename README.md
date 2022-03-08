@@ -20,15 +20,35 @@ and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at <https://hexdocs.pm/becarios_bunsan_2022_b1>.
 
 
+## Commands
+```elixir
+mix deps.get
+```
+
+```elixir
+iex (-S mix)
+```
+
 ## Modules
 
 ### WordCount
 
 compile the program
 ```
+c "./lib/cdmx_challenge.ex"
+```
+
+```
+c "./lib/sweet_xml_examples.ex"
+```
+
+```
 c "./lib/word_count.ex"
 ```
 
+```
+c "./lib/my_list.ex"
+```
 
 ### ExUnit
 ```
