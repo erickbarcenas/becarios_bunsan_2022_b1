@@ -439,14 +439,16 @@ IO.puts vs inspect
 ```
 
 
-Hola Edgar, espero que estés muy bien.
-Para construir el grafo si bajo el código 
-de Github 
+  # alias CDMXChallenge.Line
+  # %Lines{}
 
-aún en la  línea 7 dice que si es menor a 100 haga
-la gráfica. 
+  # pantitlan = %Station{name: "Pantitlan", coords: {0.123, 90.123}}
+  # hangares = %Station{name: "Pantitlan", coords: {0.123, 90.123}}
+  # linea_5 = %Line{name: "Línea 5", stations: [pantitlan, hangares]}
+  # alias CDMXChallenge.Station
 
-when map_size(vs) < 100 do
 
-¿Cómo lo resolviste? por favor
+  # defmodule Foo do
+  #  def get_coords(s = %{})
+  # end
 
