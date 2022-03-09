@@ -378,3 +378,75 @@ env MIX_ENV=test mix coveralls.detail
 ```
 
 
+
+
+## Examples
+```elixir
+KeywordList
+[{:one, 1}, {:two, 2}, {:three, 3}]
+```
+
+```elixir
+Graph.new
+```
+
+```elixir
+" a dddd hdhdhd " |> String.split("", parts:5, trim: true)
+```
+
+```elixir
+" a dddd hdhdhd " |> String.split("", trim: true)
+```
+
+
+Comprehensions
+
+```elixir
+for x <- [1, 2, 3] do
+  x * x
+end
+```
+
+
+```elixir
+for x <- ["1", "2", "3"], y <- [%{coords: []}, %{coords: []}, %{coords: []}] do
+  %{
+    name: x
+    coords: []}
+end
+```
+
+```elixir
+for x <- [1, 2, 3], y <- [:a, :b, :c], z <- ["one", "two"] do
+  {x, y, z}
+end
+```
+
+```elixir
+for x <- 1..10, y <- 1..10, rem(x * y, 2) == 0, do: {x, y}
+```
+
+
+```elixir
+defmodule Blob do
+  defstruct 
+end
+
+iex> b = %Blob{content: 123}
+
+Tarea: Diferencia entre puts e inspect
+IO.puts vs inspect
+```
+
+
+Hola Edgar, espero que estés muy bien.
+Para construir el grafo si bajo el código 
+de Github 
+
+aún en la  línea 7 dice que si es menor a 100 haga
+la gráfica. 
+
+when map_size(vs) < 100 do
+
+¿Cómo lo resolviste? por favor
+

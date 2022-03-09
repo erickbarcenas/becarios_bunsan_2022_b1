@@ -1,21 +1,47 @@
 defmodule CDMXChallenge do
   import SweetXml
+
+  defmodule Line do
+
+    #defstruct name: "", stations:[] # con valor default para cada atributo
+    defstruct [:name, :stations]
+  end
+
+
+  #alias CDMXChallenge.Line
+  #%Lines{}
+
+
+  defmodule Station do
+    defstruct [:name, :coords]
+  end
+
+  # pantitlan = %Station{name: "Pantitlan", coords: {0.123, 90.123}}
+  # hangares = %Station{name: "Pantitlan", coords: {0.123, 90.123}}
+  # linea_5 = %Line{name: "Línea 5", stations: [pantitlan, hangares]}
+  # alias CDMXChallenge.Station
+
+
+  #defmodule Foo do
+  #  def get_coords(s = %{})
+  #end
+
   @doc """
 
   ## Examples
     iex> CDMXChallenge.metro_lines
     [
-      %{
+      %Line{
         name: "Linea 1",
         stations: [
-          %{name: "Pantitlan", coords: "90 30"},
+          %Station{name: "Pantitlan", coords: "90 30"},
         ]
       },
-      %{
+      %Line{
         name: "Linea 3",
         stations: [
-          %{name: "Universidad", coords: "90 30"},
-          %{name: "Copilco", coords: "90 30"},
+          %Station{name: "Universidad", coords: "90 30"},
+          %Station{name: "Copilco", coords: "90 30"},
         ]
       }
     ]
@@ -47,13 +73,13 @@ defmodule CDMXChallenge do
 
 
   # PER LINE
-
   def mine_information_every_line(item) do
     %{
        line: List.to_string(item.line) |> String.split(" ") |> Enum.at(1),
        coords: "#{item.coords}" |> String.split("\n") |> Enum.map(fn coord -> String.replace(coord, ~r"[a-z /]", "") end ) |> Enum.filter(fn x -> x != "" end)
     }
    end
+
 
   def get_all_information_every_line(xml) do
     xml
@@ -101,14 +127,21 @@ defmodule CDMXChallenge do
 
   # List.to_string
 
-  # def metro_graph(xml_path) do
-  #  lines = CDMXChallenge.metro_lines(xml_path)
-  #  # Create graph ...
-  # end
+  def metro_graph() do #xml_path
+    #lines = CDMXChallenge.metro_lines(xml_path)
+    # Create graph ...
+    g = Graph.new(type: :undirected)
+    g
+    |> Graph.add_edge("pantitlan", "hangares")
+    |> Graph.add_edge("hangares", "puerto areo")
+    |> Graph.add_edge("puerto areo", "oceania")
+
+  end
 
 
 end
 
-    # WORKS <----
-    # Enum.zip([base, result])
-    # |> Enum.into(%{})
+
+
+
+
