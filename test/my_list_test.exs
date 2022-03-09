@@ -23,9 +23,21 @@ defmodule MyListsTest do
     assert MyLists.each([], 0) == nil
   end
 
-  @tag :each
-  test "enter a non-empty list and a function" do
-    assert MyLists.map([1,2,3], fn x-> x*2 end) == [2, 4,6]
+  #@tag :each
+  #test "enter a non-empty list and a function" do
+  #  test_cases = %{
+  #    "foo" => 1,
+  #    "bar" => 2,
+  #    "baz" => 3,
+  #  }
+
+  #  Enum.each(test_cases, fn({input, expected_output}) ->
+  #    test "for #{input}" do
+  #      assert(Mymodule.myfunction input) == expected_output
+  #    end
+  #  end)
+
+    assert MyLists.each([1], fn x-> IO.puts(x*2) end) == [2, 4,6]
   end
 
   @tag :reduce
