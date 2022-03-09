@@ -10,18 +10,17 @@ defmodule MetroCDMXChallenge do
     defstruct [:name, :coords]
   end
 
-
   @doc """
   ## Examples
     iex> MetroCDMXChallenge.metro_lines
     [
-      %Line{
+      %MetroCDMXChallenge.Line{
         name: "Linea 1",
         stations: [
           %Station{name: "Pantitlan", coords: "90 30"},
         ]
       },
-      %Line{
+      %MetroCDMXChallenge.Line{
         name: "Linea 3",
         stations: [
           %Station{name: "Universidad", coords: "90 30"},
@@ -36,20 +35,20 @@ defmodule MetroCDMXChallenge do
   def metro_lines(xml_path) do
     xml = File.read!(xml_path)
     stations_aliases = get_stations_aliases(xml) # Retorna una lista con el nombre de las estaciones, ejemplo: ["1", "2", ...]
-    every_station = get_all_stations(xml)
+    all_stations = get_all_stations(xml)
 
-    stations = Enum.map(stations_aliases, fn station_name ->
-      res = Enum.filter(every_station, fn item ->
-        item.line == station_name
-       end)
-      Enum.map(res, fn item ->
-        Map.delete(item, :line)
-      end)
+    stations = Enum.map(stations_aliases, fn station_alias ->
+      Enum.filter(all_stations, fn station -> station.alias == station_alias end)
+      #|> Enum.map(fn item -> Map.delete(item, :alias) end)
+      |> Enum.map(fn item -> %Station{
+          name: item.name,
+          coords: item.coords
+      } end)
     end)
 
     Enum.map(0..(Enum.count(stations_aliases) - 1), fn idx ->
-      %{
-        name: Enum.at(stations_aliases, idx),
+      %Line{
+        name: "Línea #{Enum.at(stations_aliases, idx)}",
         stations: Enum.at(stations, idx)
       }
     end)
@@ -90,7 +89,7 @@ defmodule MetroCDMXChallenge do
   def mine_info_station(item) do
     %{
        name: List.to_string(item.name) |> String.downcase() |> String.normalize(:nfd) |> String.replace(~r/[^a-z\s]/u, ""),
-       line: List.to_string(item.line) |> String.split(".") |> Enum.at(0) |> String.split(" ") |> Enum.at(1),
+       alias: List.to_string(item.line) |> String.split(".") |> Enum.at(0) |> String.split(" ") |> Enum.at(1),
        coords: "#{item.coords}"  |>  String.replace(~r"[a-z /]", "") |> String.replace("\n", "")
     }
    end
