@@ -7,7 +7,7 @@ defmodule MetroCDMXChallenge do
   end
 
   defmodule Station do
-    defstruct [:name, :coords]
+    defstruct [:name, :coords, :position]
   end
 
   @doc """
@@ -17,34 +17,55 @@ defmodule MetroCDMXChallenge do
       %MetroCDMXChallenge.Line{
         name: "Linea 1",
         stations: [
-          %Station{name: "Pantitlan", coords: "90 30"},
+          %MetroCDMXChallenge.Station{name: "Pantitlan", coords: "90 30"},
         ]
       },
       %MetroCDMXChallenge.Line{
         name: "Linea 3",
         stations: [
-          %Station{name: "Universidad", coords: "90 30"},
-          %Station{name: "Copilco", coords: "90 30"},
+          %MetroCDMXChallenge.Station{name: "Universidad", coords: "90 30"},
+          %MetroCDMXChallenge.Station{name: "Copilco", coords: "90 30"},
         ]
       }
     ]
   """
 
+  def get_not_nil(res) do
+    if res != nil do
+      elem(res, 1)
+    end
+  end
+
+  def find_element(all_lines, item_coords) do
+    all_lines
+    |> Enum.filter(fn {coord, _, _} -> coord == item_coords  end)
+    |> Enum.at(0)
+    |> get_not_nil()
+  end
+
   ### Main functions ###
   ## PART 1
   def metro_lines(xml_path) do
     xml = File.read!(xml_path)
-    stations_aliases = get_stations_aliases(xml) # Retorna una lista con el nombre de las estaciones, ejemplo: ["1", "2", ...]
+    stations_aliases = get_stations_aliases(xml) # Return for example: ["1", "2", ...]
     all_stations = get_all_stations(xml)
+
+    all_lines = get_all_lines(xml)
+    #IO.inspect(all_stations)
 
     stations = Enum.map(stations_aliases, fn station_alias ->
       Enum.filter(all_stations, fn station -> station.alias == station_alias end)
-      #|> Enum.map(fn item -> Map.delete(item, :alias) end)
       |> Enum.map(fn item -> %Station{
           name: item.name,
-          coords: item.coords
+          coords: item.coords,
+          position: find_element(all_lines, item.coords)
       } end)
     end)
+
+    stations = Enum.map(stations, fn list ->
+      Enum.sort_by(list, fn map -> map.position end)
+    end)
+
 
     Enum.map(0..(Enum.count(stations_aliases) - 1), fn idx ->
       %Line{
@@ -64,14 +85,21 @@ defmodule MetroCDMXChallenge do
 
   ## PART 2
 
-  def metro_graph() do #xml_path
-    #lines = CDMXChallenge.metro_lines(xml_path)
-    # Create graph ...
-    g = Graph.new(type: :undirected)
-    g
-    |> Graph.add_edge("pantitlan", "hangares")
-    |> Graph.add_edge("hangares", "puerto areo")
-    |> Graph.add_edge("puerto areo", "oceania")
+  def greate_pair(g, Graph, pair) do
+    one = Enum.at(pair, 0)
+    two = Enum.at(pair, 1)
+    g |> Graph.add_edge(one, two)
+  end
+  def metro_graph(xml_path) do
+    lines = metro_lines(xml_path)
+    graph = Graph.new(type: :undirected)
+
+    Enum.reduce(lines, graph, fn line, graph ->
+      pair = Enum.chunk_every(line.stations, 2, 1, :discard)
+      Enum.reduce(pair, graph, fn stations, graph ->
+        Graph.add_edge(graph, List.first(stations).name, List.last(stations).name)
+      end)
+    end)
   end
 
 
@@ -95,6 +123,7 @@ defmodule MetroCDMXChallenge do
    end
 
   ### Analysis to obtain information on each metro line ###
+
   def get_all_lines(xml) do
     xml
     |> xpath(
@@ -103,7 +132,17 @@ defmodule MetroCDMXChallenge do
       coords: ~x"./LineString/coordinates/text()"
       )
     |> Enum.map(fn item -> mine_info_line(item) end)
+
+    |> Enum.map(fn line -> line.coords
+        |> Enum.with_index()
+        |> Enum.map(fn item ->
+            Tuple.append(item, line.line)
+          end)
+    end)
+    |> List.flatten()
+
   end
+
   def mine_info_line(item) do
     %{
        line: List.to_string(item.line) |> String.split(" ") |> Enum.at(1),
@@ -111,3 +150,4 @@ defmodule MetroCDMXChallenge do
     }
    end
 end
+
