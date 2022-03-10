@@ -34,6 +34,12 @@ iex (-S mix)
 
 ## MetroCDMXChallenge
 
+### Parte 2
+```
+iex> MetroCDMXChallenge.metro_graph("./data/cdmx_challenge/cdmx_challenge.kml")
+#Graph<type: undirected, num_vertices: 144, num_edges: 132>
+```
+### Parte 1
 ```
 iex> MetroCDMXChallenge.metro_lines("./data/cdmx_challenge/cdmx_challenge.kml")
 [
