@@ -757,6 +757,9 @@ Randomized with seed 512286
 ```
 mix test --only map
 ```
+```
+@tag :skip 
+```
 
 ```
 Excluding tags: [:test]
@@ -871,4 +874,154 @@ IO.puts vs inspect
   # defmodule Foo do
   #  def get_coords(s = %{})
   # end
+
+
+```elixir
+Enum.map(1..5, fn x + 1 end)
+Enum.map(1..5, &(&1 + 1))
+```
+
+```elixir
+Enum.map(1..5, fn x + 1 end)
+Enum.map(1..5, &(&1 + 1))
+
+defmodule Match do
+  def sum(x, y), do x + y
+  def sum1(x), do x + 1
+end
+
+Enum.map(1..5, &Match.sum1/1)
+```
+
+
+```elixir
+m = %{one: 1, two: 2}
+Enum.map(m, fn {_key, value} -> value end)
+```
+
+```elixir
+Tuple.to_list({:one, 1})
+```
+
+```elixir
+defmodule Match do
+  def sum(x, y), do: x + y
+end
+
+f = &Match/2
+
+f.(5, 6)
+
+f.(10, 2)
+
+
+defmodule Foo do
+  def apply(f, x, y) do
+    f.(x, y)
+  end
+end
+
+
+Foo.apply(fn a, b -> a + b end, 5, 4)
+
+Foo.apply(&Match.sum/2, 5, 4)
+
+
+Foo.apply(&(&1 + &2)), 5, 4)
+# &Math
+```
+
+
+```
+"Erick Bárcenas" |> 
+```
+
+```
+iex> is_map(m)
+true
+```
+
+```
+iex> inspect(m)
+true
+```
+
+```
+iex> inspect(m) # Kernel.inspect(m)
+"%{one: 1, two: 2}"
+```
+
+```elixir
+# iex> Logger.info("hola mundo")
+
+defmodule Foo do
+  require Logger
+
+  def log_something(:info, msg) do
+    Logger.info(msg)
+  end
+
+  def log_something(:debug, msg) do
+    Logger.debug(msg)
+  end
+
+end
+
+Foo.log_something(:info, "info")
+
+Foo.log_something(:debug, msg)
+```
+
+Guardas
+```elixir
+defmodule TestNum do
+  def test(x) when is_integer(x) and x < 0 do
+    :negative
+  end
+
+  def test(0) do
+    :zero
+  end
+
+  def test(x) when is_number(x) and x > 0 do
+    :positive
+  end
+end
+
+
+defmodule TestNum do
+
+  def test(x) when is_number(x) and x < 0 do
+    :negative
+  end
+
+  def test(0) do
+    :zero
+  end
+
+  def test(x) when is_number(x) and x > 0 do
+    :positive
+  end
+end
+
+TestNum.test(10)
+
+```
+
+```
+iex> TestNum.test
+```
+
+```elixir
+
+iex(2)> Kernel.is_
+is_atom/1         is_binary/1       is_bitstring/1    is_boolean/1      
+is_exception/1    is_exception/2    is_float/1        is_function/1     
+is_function/2     is_integer/1      is_list/1         is_map/1          
+is_map_key/2      is_nil/1          is_number/1       is_pid/1          
+is_port/1         is_reference/1    is_struct/1       is_struct/2       
+is_tuple/1 
+```
+
+
 

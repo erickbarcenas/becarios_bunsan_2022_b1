@@ -26,7 +26,9 @@ defmodule BecariosBunsan2022B1.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:excoveralls, "~> 0.10", only: :test},
       {:sweet_xml, "~> 0.7.2"},
-      {:libgraph, "~> 0.13.3"}
+      {:libgraph, "~> 0.13.3"},
+      {:httpotion, "~> 3.1.0"},
+      {:poison, "~> 5.0"}
     ]
   end
 end
