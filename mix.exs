@@ -28,7 +28,8 @@ defmodule BecariosBunsan2022B1.MixProject do
       {:sweet_xml, "~> 0.7.2"},
       {:libgraph, "~> 0.13.3"},
       {:httpotion, "~> 3.1.0"},
-      {:poison, "~> 5.0"}
+      {:poison, "~> 5.0"},
+      {:tzdata, "~> 1.1"},
     ]
   end
 end
