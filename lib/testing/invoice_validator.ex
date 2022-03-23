@@ -3,6 +3,7 @@ defmodule InvoiceValidator do
         Somos un PAC.
         Validar si una factura es válida o no.
     """
+    
 
     def datetime_to_utc(date_time) do
         offset = date_time.utc_offset # / 3600 
@@ -24,6 +25,7 @@ defmodule InvoiceValidator do
     # Recibe Datetime Naive
     # pac_date = DateTime.utc_now
     def validate_dates(%DateTime{} = emisor_date, %DateTime{} = pac_date) do
+        Calendar.put_time_zone_database(Tzdata.TimeZoneDatabase) 
         # pac_date genera al momento de llegar emisor_date
         hour = 60*60
         five_minutes = 5*60 / hour

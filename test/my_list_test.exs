@@ -37,8 +37,8 @@ defmodule MyListsTest do
   #    end
   #  end)
 
-    assert MyLists.each([1], fn x-> IO.puts(x*2) end) == [2, 4,6]
-  end
+  #  assert MyLists.each([1], fn x-> IO.puts(x*2) end) == [2, 4,6]
+  # end
 
   @tag :reduce
   test "enter a non-empty list an accumulator and a function" do
