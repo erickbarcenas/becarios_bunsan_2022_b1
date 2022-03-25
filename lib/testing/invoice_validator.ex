@@ -56,12 +56,12 @@ end
 # %DateTime{year: 2000, month: 2, day: 29, zone_abbr: "AMT", hour: 23, minute: 0, second: 7, microsecond: {0, 0},utc_offset: -14400, std_offset: 0, time_zone: "America/Manaus"}
 
 
-emisor_date = DateTime.from_naive!(~N[2022-03-20 14:16:35], "Mexico/BajaNorte")
-pac_date = DateTime.from_naive!(~N[2022-03-20 15:16:35], "Mexico/BajaSur")
+# emisor_date = DateTime.from_naive!(~N[2022-03-20 14:16:35], "Mexico/BajaNorte")
+# pac_date = DateTime.from_naive!(~N[2022-03-20 15:16:35], "Mexico/BajaSur")
 
 
-emisor_date = DateTime.from_naive!(~N[2022-03-20 14:16:35], "Mexico/BajaNorte")
-pac_date = DateTime.from_naive!(~N[2022-03-20 15:16:35], "Mexico/BajaSur")
+# emisor_date = DateTime.from_naive!(~N[2022-03-20 14:16:35], "Mexico/BajaNorte")
+# pac_date = DateTime.from_naive!(~N[2022-03-20 15:16:35], "Mexico/BajaSur")
 
 
-InvoiceValidator.validate_dates(emisor_date, pac_date)
+# InvoiceValidator.validate_dates(emisor_date, pac_date)
