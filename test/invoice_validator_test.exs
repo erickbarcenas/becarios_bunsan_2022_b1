@@ -15,11 +15,12 @@ defmodule InvoiceValidatorTest do
         pac_date = DateTime.from_naive!(~N[2022-10-24 10:10:10], "Mexico/General")
         # emisión: cualquier lugar
         emisor_date1 = DateTime.from_naive!(~N[2022-10-21 07:10:10], "Mexico/BajaNorte")
-        emisor_date2 = DateTime.from_naive!(~N[2022-10-21 12:05:00], "Mexico/BajaNorte")
+        emisor_date2 = DateTime.from_naive!(~N[2022-10-24 13:00:00], "Mexico/BajaNorte")
         emisor_date3 = DateTime.from_naive!(~N[2022-10-24 12:00:00], "Mexico/BajaNorte")
+
         assert {:error, "Invoice was issued more than 72 hrs before received by the PAC"} == InvoiceValidator.validate_dates(emisor_date1, pac_date)
         assert {:error, "Invoice is more than 5 mins ahead in time"} == InvoiceValidator.validate_dates(emisor_date2, pac_date)
-        assert :ok == InvoiceValidator.validate_dates(emisor_date3, pac_date)
+        assert :ok == InvoiceValidator.validate_dates(emisor_date3, @pac_dt)
     end
 
     @tag :pacifico
@@ -28,7 +29,7 @@ defmodule InvoiceValidatorTest do
         pac_date = DateTime.from_naive!(~N[2022-10-24 10:10:10], "Mexico/General")
         # emisión: cualquier lugar
         emisor_date1 = DateTime.from_naive!(~N[2022-10-21 08:10:10], "Mexico/BajaSur")
-        emisor_date2 = DateTime.from_naive!(~N[2022-10-21 11:00:00], "Mexico/BajaSur")
+        emisor_date2 = DateTime.from_naive!(~N[2022-10-24 12:00:00], "Mexico/BajaSur")
         emisor_date3 = DateTime.from_naive!(~N[2022-10-24 10:55:00], "Mexico/BajaSur")
         assert {:error, "Invoice was issued more than 72 hrs before received by the PAC"} == InvoiceValidator.validate_dates(emisor_date1, pac_date)
         assert {:error, "Invoice is more than 5 mins ahead in time"} == InvoiceValidator.validate_dates(emisor_date2, pac_date)
@@ -41,7 +42,7 @@ defmodule InvoiceValidatorTest do
         pac_date = DateTime.from_naive!(~N[2022-10-24 10:10:10], "Mexico/General")
         # emisión: cualquier lugar
         emisor_date1 = DateTime.from_naive!(~N[2022-10-21 07:10:10], "Mexico/General")
-        emisor_date2 = DateTime.from_naive!(~N[2022-10-21 10:05:10], "Mexico/General")
+        emisor_date2 = DateTime.from_naive!(~N[2022-10-24 12:05:10], "Mexico/General")
         emisor_date3 = DateTime.from_naive!(~N[2022-10-24 10:14:10], "Mexico/General")
         assert {:error, "Invoice was issued more than 72 hrs before received by the PAC"} == InvoiceValidator.validate_dates(emisor_date1, pac_date)
         assert {:error, "Invoice is more than 5 mins ahead in time"} == InvoiceValidator.validate_dates(emisor_date2, pac_date)
@@ -55,47 +56,31 @@ defmodule InvoiceValidatorTest do
         pac_date = DateTime.from_naive!(~N[2022-10-24 10:10:10], "Mexico/General")
         # emisión: cualquier lugar
         emisor_date1 = DateTime.from_naive!(~N[2022-10-21 07:10:10], "America/Cancun")
-        emisor_date2 = DateTime.from_naive!(~N[2022-10-21 08:10:10], "America/Cancun")
-        emisor_date3 = DateTime.from_naive!(~N[2022-10-24 10:14:10], "America/Cancun")
+        emisor_date2 = DateTime.from_naive!(~N[2024-10-24 12:00:10], "America/Cancun")
+        emisor_date3 = DateTime.from_naive!(~N[2022-10-23 12:14:10], "America/Cancun")
         assert {:error, "Invoice was issued more than 72 hrs before received by the PAC"} == InvoiceValidator.validate_dates(emisor_date1, pac_date)
         assert {:error, "Invoice is more than 5 mins ahead in time"} == InvoiceValidator.validate_dates(emisor_date2, pac_date)
         assert :ok == InvoiceValidator.validate_dates(emisor_date3, pac_date)
     end
 
 
-    #@tag :2_hours_ago
-    #test "offset: 2 hours ago" do
-    #    Calendar.put_time_zone_database(Tzdata.TimeZoneDatabase)
-    #    # timbrado: centro
-    #    pac_date = DateTime.from_naive!(~N[23/3/2022 15:06:35], "Mexico/General")
-    #end
-
-    #@tag :5_minutes_ahead_success
-    #test "offset: 5 minutes ahead" do
-     #   Calendar.put_time_zone_database(Tzdata.TimeZoneDatabase)
-    #    # timbrado: centro
-     #   pac_date = DateTime.from_naive!(~N[23/3/2022 15:06:35], "Mexico/General")
-     #   emisor_date1 = DateTime.from_naive!(~N[], "America/Cancun")
-     #  
-    #end
-
     data = [
         {"72 hrs atrás",   "America/Mazatlan",	~N[2022-03-20 13:06:31],	{ :error, "Invoice was issued more than 72 hrs before received by the PAC"} },
         {"72 hrs atrás",   "America/Mazatlan",	~N[2022-03-20 14:06:31],    { :error, "Invoice was issued more than 72 hrs before received by the PAC"} },
         {"72 hrs atrás",   "Mexico/General",	~N[2022-03-20 15:06:31],	:ok },
         {"72 hrs atrás",   "America/Cancun",	~N[2022-03-20 16:06:31],	:ok },
-        {"72 hrs atrás",   "America/Mazatlan",	~N[2022-03-20 13:06:35],	{ :error, "Invoice was issued more than 72 hrs before received by the PAC"} },
-        {"72 hrs atrás",   "America/Mazatlan",	~N[2022-03-20 14:06:35],	{ :error, "Invoice was issued more than 72 hrs before received by the PAC"} },
+        {"72 hrs atrás",   "America/Mazatlan",	~N[2022-03-20 13:06:35],	{:error, "Invoice was issued more than 72 hrs before received by the PAC"} },
+        {"72 hrs atrás",   "America/Mazatlan",	~N[2022-03-20 14:06:35],	{:error, "Invoice was issued more than 72 hrs before received by the PAC"} },
         {"72 hrs atrás",   "Mexico/General",	~N[2022-03-20 15:06:35],	:ok },
         {"72 hrs atrás",   "America/Cancun",	~N[2022-03-20 16:06:35],	:ok },
         {"5 mins adelante", "America/Mazatlan",	~N[2022-03-23 13:11:35],	:ok },
         {"5 mins adelante", "America/Mazatlan",	~N[2022-03-23 14:11:35],	:ok },
         {"5 mins adelante", "Mexico/General",	~N[2022-03-23 15:11:35],	:ok },
-        {"5 mins adelante", "America/Cancun",	~N[2022-03-23 16:11:35],	:ok },
-        {"5 mins adelante", "America/Mazatlan",	~N[2022-03-23 13:11:36],	:ok },
-        {"5 mins adelante", "America/Mazatlan",	~N[2022-03-23 14:11:36],	:ok },
-        {"5 mins adelante", "Mexico/General",	~N[2022-03-23 15:11:36],	:ok },
-        {"5 mins adelante", "America/Cancun",	~N[2022-03-23 16:11:36],	:ok }
+        {"5 mins adelante", "America/Cancun",	~N[2022-03-23 16:11:35],	{:error, "Invoice is more than 5 mins ahead in time"} },
+        {"5 mins adelante", "America/Mazatlan",	~N[2022-03-23 13:11:36],	:ok }, #
+        {"5 mins adelante", "America/Mazatlan",	~N[2022-03-23 14:11:36],	:ok }, #
+        {"5 mins adelante", "Mexico/General",	~N[2022-03-23 15:11:36],	{:error, "Invoice is more than 5 mins ahead in time"} },
+        {"5 mins adelante", "America/Cancun",	~N[2022-03-23 16:11:36],	{:error, "Invoice is more than 5 mins ahead in time"} } #ok
     ]
 
 
@@ -108,7 +93,7 @@ defmodule InvoiceValidatorTest do
             pac_date = DateTime.from_naive!(~N[2022-03-23 15:06:35], "Mexico/General")
             emisor = create_datetime(@datetime, @timezone)
 
-          assert InvoiceValidator.validate_dates(emisor, pac_date) == @response
+          assert @response == InvoiceValidator.validate_dates(emisor, pac_date)
         end
     end
     

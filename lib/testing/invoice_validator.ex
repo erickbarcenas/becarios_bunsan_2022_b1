@@ -44,9 +44,11 @@ defmodule InvoiceValidator do
 
         
         cond do
+            diff < -five_minutes -> { :error, "Invoice is more than 5 mins ahead in time" }
             diff < (time_limit + five_minutes) -> :ok # Hacer el timbrado
-            diff > (time_limit + 1) -> { :error, "Invoice was issued more than 72 hrs before received by the PAC" }
-            true -> { :error, "Invoice is more than 5 mins ahead in time" }
+            # diff > (time_limit + 1) -> { :error, "Invoice was issued more than 72 hrs before received by the PAC" }
+            true -> 
+                { :error, "Invoice was issued more than 72 hrs before received by the PAC" }
         end
 
     end
