@@ -707,6 +707,9 @@ c "./lib/my_list.ex"
 mix test
 ```
 
+### Cobertura
+env MIX_ENV=test mix coveralls
+
 ```
 ..................
 

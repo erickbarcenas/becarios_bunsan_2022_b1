@@ -4,18 +4,9 @@ defmodule InvoiceValidator do
         Validar si una factura es válida o no.
     """
     
-
     def datetime_to_utc(date_time) do
         offset = date_time.utc_offset # / 3600 
 
-        # year = date_time.year
-        # month = date_time.month
-        # day = date_time.day
-        # hour = date_time.hour
-        # minute = date_time.minute
-        # second = date_time.second
-        
-        #str_date = "#{year}" <> "-" <> "#{month}" <> "-" <> "#{day}" <> " " <> "#{hour}" <> ":" <> "#{minute}" <> ":" <> "#{second}"
         base = date_time |> DateTime.to_string() |> String.split(" ")
         date = base |> Enum.at(0)
         time = base |> Enum.at(1) |> String.split("-") |> Enum.at(0)
@@ -42,7 +33,6 @@ defmodule InvoiceValidator do
         # emisor date se normaliza a utf
         diff = DateTime.diff(dt2, dt1, :second) / hour
 
-        
         cond do
             diff < -five_minutes -> { :error, "Invoice is more than 5 mins ahead in time" }
             diff < (time_limit + five_minutes) -> :ok # Hacer el timbrado
@@ -50,20 +40,5 @@ defmodule InvoiceValidator do
             true -> 
                 { :error, "Invoice was issued more than 72 hrs before received by the PAC" }
         end
-
     end
-
 end
-
-# %DateTime{year: 2000, month: 2, day: 29, zone_abbr: "AMT", hour: 23, minute: 0, second: 7, microsecond: {0, 0},utc_offset: -14400, std_offset: 0, time_zone: "America/Manaus"}
-
-
-# emisor_date = DateTime.from_naive!(~N[2022-03-20 14:16:35], "Mexico/BajaNorte")
-# pac_date = DateTime.from_naive!(~N[2022-03-20 15:16:35], "Mexico/BajaSur")
-
-
-# emisor_date = DateTime.from_naive!(~N[2022-03-20 14:16:35], "Mexico/BajaNorte")
-# pac_date = DateTime.from_naive!(~N[2022-03-20 15:16:35], "Mexico/BajaSur")
-
-
-# InvoiceValidator.validate_dates(emisor_date, pac_date)
