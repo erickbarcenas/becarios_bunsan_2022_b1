@@ -1,8 +1,8 @@
 ## Ejercicio 1: HTTP
 
 Este es un ejemplo de una solicitud (request) HTTP.
-```
-GET /collaborators  HTTP/1.1
+```html
+GET /collaborators HTTP/1.1
 Host: wareware.bunsan.io
 User Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124
 (KHTML, like Gecko) Safari/125
@@ -16,8 +16,8 @@ Connection: keep-alive
 ### Responde a las siguientes preguntas, indicando dónde (por ejemplo, en qué campo) en la solicitud HTTP puedes encontrar la respuesta:
 
 **1) ¿Cuál es la URL solicitada?**
-```
-GET **/collaborators**  HTTP/1.1
+```html
+GET <strong>/collaborators</strong>  HTTP/1.1
 Host: wareware.bunsan.io
 User Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124
 (KHTML, like Gecko) Safari/125
