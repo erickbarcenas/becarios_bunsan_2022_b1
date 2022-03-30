@@ -17,7 +17,7 @@ Connection: keep-alive
 
 **1) ¿Cuál es la URL solicitada?**
 ```html
-GET <strong>/collaborators</strong>  HTTP/1.1
+GET <font color="red">/collaborators</font>  HTTP/1.1
 Host: wareware.bunsan.io
 User Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/124
 (KHTML, like Gecko) Safari/125
