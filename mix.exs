@@ -1,6 +1,5 @@
 defmodule BecariosBunsan2022B1.MixProject do
   use Mix.Project
-  
 
   def project do
     [
@@ -30,7 +29,7 @@ defmodule BecariosBunsan2022B1.MixProject do
       {:libgraph, "~> 0.13.3"},
       {:httpotion, "~> 3.1.0"},
       {:poison, "~> 5.0"},
-      {:tzdata, "~> 1.1"},
+      {:tzdata, "~> 1.1"}
     ]
   end
 end

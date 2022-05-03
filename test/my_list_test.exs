@@ -7,11 +7,13 @@ defmodule MyListsTest do
   test "when an empty array enters" do
     assert MyLists.map([]) == []
   end
+
   @tag :map
   # @tag timeout: 0.09
   test "enter an empty list and anything else [map]" do
     assert MyLists.map([], 0) == []
   end
+
   @tag :map
   # @tag timeout: 0.08
   test "enter an empty list and a function" do
@@ -23,8 +25,8 @@ defmodule MyListsTest do
     assert MyLists.each([], 0) == nil
   end
 
-  #@tag :each
-  #test "enter a non-empty list and a function" do
+  # @tag :each
+  # test "enter a non-empty list and a function" do
   #  test_cases = %{
   #    "foo" => 1,
   #    "bar" => 2,
@@ -42,9 +44,8 @@ defmodule MyListsTest do
 
   @tag :reduce
   test "enter a non-empty list an accumulator and a function" do
-    assert MyLists.reduce([1, 2, 3], 10, fn(x, acc) -> x + acc end) == 16
+    assert MyLists.reduce([1, 2, 3], 10, fn x, acc -> x + acc end) == 16
   end
-
 
   @tag :zip
   test "enter an empty list and anything else" do
@@ -61,7 +62,6 @@ defmodule MyListsTest do
     assert MyLists.zip([1, 2, 3, 4, 5], [:a, :b, :c]) == [{1, :a}, {2, :b}, {3, :c}]
   end
 
-
   @tag :zip_with
   test "enter an empty list and any two parameters" do
     assert MyLists.zip_with([], 0, 0) == []
@@ -76,5 +76,4 @@ defmodule MyListsTest do
   test "enter two non-empty list" do
     assert MyLists.zip_with([1, 2], [3, 4], fn x, y -> x + y end) == [4, 6]
   end
-
 end

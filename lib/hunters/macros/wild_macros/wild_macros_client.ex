@@ -1,7 +1,7 @@
 defmodule WildMacros.Client do
   require WildMacros
-  import  WildMacros
-  import  Kernel, except: [..: 2, --: 2]
+  import WildMacros
+  import Kernel, except: [..: 2, --: 2]
 
   :foo..:bar
   :ying..:yang

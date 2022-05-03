@@ -25,14 +25,17 @@ defmodule WordCount do
     # Reading from the text file
     File.read!(filename)
   end
+
   def clean(file) do
     file
-    |> String.normalize(:nfd) # "á" -> "a", "´"
+    # "á" -> "a", "´"
+    |> String.normalize(:nfd)
     |> String.replace(~r/[^A-z\s]/u, "")
     |> String.downcase()
     |> String.split(~r/[^[:alnum:]-]/u, trim: true)
     |> List.flatten()
   end
+
   def count(filename) do
     read(filename)
     |> clean()
@@ -40,5 +43,4 @@ defmodule WordCount do
   end
 end
 
-
-#iex -S mix
+# iex -S mix
