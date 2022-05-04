@@ -13,6 +13,7 @@ defmodule ProcessRing do
     |> Enum.each(fn {pid, next_pid} ->
       send(pid, {:config, next_pid, false})
     end)
+
     hd(pids)
   end
 
@@ -25,7 +26,9 @@ defmodule ProcessRing do
       {:config, next_pid, main} ->
         IO.puts("pid: #{inspect(self())}, next: #{inspect(next_pid)} main: #{main}")
         process_msg(next_pid, main)
-      _ -> :ok
+
+      _ ->
+        :ok
     end
   end
 
@@ -40,11 +43,12 @@ defmodule ProcessRing do
   def process_msg(next, main) do
     receive do
       {:continue, msg, current_round, goal} ->
-        
-
         if current_round > 1 do
           new_current_round = current_round - 1
-          IO.puts("Process #{inspect(self())} received message \"#{msg}\", round #{new_current_round}")
+
+          IO.puts(
+            "Process #{inspect(self())} received message \"#{msg}\", round #{new_current_round}"
+          )
 
           case next_message(current_round, goal, main) do
             :stop -> :stop
@@ -56,9 +60,11 @@ defmodule ProcessRing do
             n when is_number(n) -> send(next, {:continue, msg, n, goal})
           end
         end
-        
-      _ -> :ok
+
+      _ ->
+        :ok
     end
+
     process_msg(next, main)
   end
 end
