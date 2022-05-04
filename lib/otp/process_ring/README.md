@@ -1,5 +1,11 @@
 # Process Ring
 
+## Screenshot
+
+![fixed_process_ring](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/otp/fixed_process_ring/assets/fixed_process_ring.jpeg)
+
+
+## iex
 ```elixir
 iex> c "lib/otp/process_ring/process_ring.ex"   
 ```
