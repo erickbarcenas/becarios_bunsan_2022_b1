@@ -103,5 +103,4 @@ defmodule ProcessRing do
       _ -> current_round
     end
   end
-
 end
