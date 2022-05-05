@@ -16,19 +16,42 @@ defmodule WordCount do
       }
   """
 
+
+  def join_the_maps(data) do
+    reduction = 
+    data
+    |> Enum.chunk_every(2)
+    |> Enum.map(fn pair -> 
+      cond do
+        Enum.count(pair) == 2 ->
+          a = Enum.at(pair, 0)
+          b = Enum.at(pair, 0)
+          Map.merge(a, b, fn _k, v1, v2 -> v1 + v2 end)
+        true -> Enum.at(pair, 0)
+      end
+    end)
+
+    if Enum.count(reduction) == 1 do
+      reduction
+      |> Enum.at(0)
+    else
+      join_the_maps(reduction)
+    end
+  end
+
   def frequencies_tasks(path) do
     path
     |> File.stream!()
     |> Enum.chunk_every(1_000)
     |> Enum.map(fn lines -> Task.async(fn -> word_count(Enum.join(lines)) end) end)
     |> Enum.map(fn task -> Task.await(task) end)
-    # Join the maps
+    |> join_the_maps()
   end
 
   def frequencies(path) do
     File.read!(path)
     |> word_count()
-    # Join the maps
+    |> join_the_maps()
   end
 
   def word_count(text) do
@@ -43,3 +66,5 @@ defmodule WordCount do
     end)
   end
 end
+
+
