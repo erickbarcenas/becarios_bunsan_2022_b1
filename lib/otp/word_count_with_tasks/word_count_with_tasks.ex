@@ -16,20 +16,21 @@ defmodule WordCount do
       }
   """
 
-
   def join_the_maps(data) do
-    reduction = 
-    data
-    |> Enum.chunk_every(2)
-    |> Enum.map(fn pair -> 
-      cond do
-        Enum.count(pair) == 2 ->
-          a = Enum.at(pair, 0)
-          b = Enum.at(pair, 0)
-          Map.merge(a, b, fn _k, v1, v2 -> v1 + v2 end)
-        true -> Enum.at(pair, 0)
-      end
-    end)
+    reduction =
+      data
+      |> Enum.chunk_every(2)
+      |> Enum.map(fn pair ->
+        cond do
+          Enum.count(pair) == 2 ->
+            a = Enum.at(pair, 0)
+            b = Enum.at(pair, 0)
+            Map.merge(a, b, fn _k, v1, v2 -> v1 + v2 end)
+
+          true ->
+            Enum.at(pair, 0)
+        end
+      end)
 
     if Enum.count(reduction) == 1 do
       reduction
@@ -65,5 +66,3 @@ defmodule WordCount do
     end)
   end
 end
-
-
