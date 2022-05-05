@@ -51,7 +51,6 @@ defmodule WordCount do
   def frequencies(path) do
     File.read!(path)
     |> word_count()
-    |> join_the_maps()
   end
 
   def word_count(text) do
