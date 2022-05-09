@@ -1,4 +1,7 @@
 defmodule CounterAgent do
+  @moduledoc """
+    Arithmetic operations calculator using an Agent
+  """
   use Agent
 
   def start(init_val) do

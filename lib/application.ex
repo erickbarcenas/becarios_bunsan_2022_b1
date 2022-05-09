@@ -1,11 +1,10 @@
 defmodule BecariosBunsan.Application do
-    use Application
+  @moduledoc false
+  use Application
 
-    def start(_type, _args) do
-      children = [
-        
-      ]
-      opts = [strategy: :one_for_one, name: Neptune.Supervisor]
-      Supervisor.start_link(children, opts)
-    end
+  def start(_type, _args) do
+    children = []
+    opts = [strategy: :one_for_one, name: Neptune.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
 end

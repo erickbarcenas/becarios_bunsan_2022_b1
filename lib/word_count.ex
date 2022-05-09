@@ -21,24 +21,13 @@ defmodule WordCount do
       }
   """
 
-  def read(filename) do
-    # Reading from the text file
+  def count(filename) do
     File.read!(filename)
-  end
-
-  def clean(file) do
-    file
-    # "á" -> "a", "´"
     |> String.normalize(:nfd)
     |> String.replace(~r/[^A-z\s]/u, "")
     |> String.downcase()
     |> String.split(~r/[^[:alnum:]-]/u, trim: true)
     |> List.flatten()
-  end
-
-  def count(filename) do
-    read(filename)
-    |> clean()
     |> Enum.reduce(%{}, fn word, acc -> Map.update(acc, word, 1, fn freq -> freq + 1 end) end)
   end
 end

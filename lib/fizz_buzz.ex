@@ -24,8 +24,8 @@ defmodule FizzBuzz do
     end
   end
 
-  @spec fizzBuzz(integer) :: result | [result]
-  def fizzBuzz(stop) do
+  @spec fizz_buzz(integer) :: result | [result]
+  def fizz_buzz(stop) do
     if stop == 0 do
       0
     else

@@ -1,12 +1,17 @@
 defmodule MetroCDMXChallenge do
+  @moduledoc """
+    System that calculates the route from one station to another
+  """
   import SweetXml
 
   defmodule Line do
+    @moduledoc false
     # defstruct name: "", stations:[] # con valor default para cada atributo
     defstruct [:name, :stations]
   end
 
   defmodule Station do
+    @moduledoc false
     defstruct [:name, :coords, :position]
   end
 

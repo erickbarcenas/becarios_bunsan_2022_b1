@@ -1,4 +1,5 @@
 defmodule WildMacros.Client do
+  @moduledoc false
   require WildMacros
   import WildMacros
   import Kernel, except: [..: 2, --: 2]

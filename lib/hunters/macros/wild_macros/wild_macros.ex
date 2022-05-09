@@ -1,4 +1,5 @@
 defmodule WildMacros do
+  @moduledoc false
   defmacro left..right do
     quote do
       def unquote(left)(), do: unquote(right)

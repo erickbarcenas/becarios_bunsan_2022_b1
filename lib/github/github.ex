@@ -1,4 +1,7 @@
 defmodule Github do
+  @moduledoc """
+    GET to a Github rest API
+  """
   HTTPotion.start()
   @username "erickbarcenas"
   "https://api.github.com/users/#{@username}/repos"

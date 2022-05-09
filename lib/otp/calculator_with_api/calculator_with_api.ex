@@ -1,4 +1,7 @@
 defmodule CalculatorApi do
+  @moduledoc """
+    Arithmetic operations calculator using processes
+  """
   def init() do
     spawn(fn -> calc(0) end)
   end
