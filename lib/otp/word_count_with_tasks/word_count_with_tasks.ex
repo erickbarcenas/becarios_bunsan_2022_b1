@@ -1,4 +1,4 @@
-defmodule WordCount do
+defmodule WordCountTask do
   @moduledoc """
     Documentation for `WordCount`: 
     count the number of times a word is repeated

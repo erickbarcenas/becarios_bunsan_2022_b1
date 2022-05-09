@@ -1,5 +1,6 @@
 defmodule BecariosBunsan2022B1.MixProject do
   use Mix.Project
+  
 
   def project do
     [
@@ -15,6 +16,7 @@ defmodule BecariosBunsan2022B1.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
+      mod: {BecariosBunsan.Application, []},
       extra_applications: [:logger]
     ]
   end
@@ -29,7 +31,8 @@ defmodule BecariosBunsan2022B1.MixProject do
       {:libgraph, "~> 0.13.3"},
       {:httpotion, "~> 3.1.0"},
       {:poison, "~> 5.0"},
-      {:tzdata, "~> 1.1"}
+      {:tzdata, "~> 1.1"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 end

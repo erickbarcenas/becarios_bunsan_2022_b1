@@ -1,4 +1,4 @@
-defmodule ProcessRing do
+defmodule FixProcessRing do
   def init(n) do
     pids = Enum.map(1..n, fn _ -> spawn(&wait_for_config/0) end)
     next_pids = Enum.drop(pids, 1) ++ [hd(pids)]
