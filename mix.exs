@@ -31,7 +31,10 @@ defmodule BecariosBunsan2022B1.MixProject do
       {:httpotion, "~> 3.1.0"},
       {:poison, "~> 5.0"},
       {:tzdata, "~> 1.1"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:tesla, "~> 1.4"},
+      {:hackney, "~> 1.17"},
+      {:jason, ">= 1.0.0"}
     ]
   end
 end

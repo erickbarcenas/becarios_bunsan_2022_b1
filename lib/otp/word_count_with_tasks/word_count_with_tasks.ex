@@ -18,10 +18,9 @@ defmodule WordCountTask do
 
   def divide_in_pairs(pair) do
     if Enum.count(pair) == 2 do
-      Enum.count(pair) == 2 ->
-        a = Enum.at(pair, 0)
-        b = Enum.at(pair, 0)
-        Map.merge(a, b, fn _k, v1, v2 -> v1 + v2 end)
+      a = Enum.at(pair, 0)
+      b = Enum.at(pair, 0)
+      Map.merge(a, b, fn _k, v1, v2 -> v1 + v2 end)
     else
       Enum.at(pair, 0)
     end
