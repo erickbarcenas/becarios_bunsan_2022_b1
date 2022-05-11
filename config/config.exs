@@ -9,4 +9,10 @@
 
 # config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
-# import_config "#{config_env()}.exs"
+
+
+import Config
+
+config :becarios_bunsan_2022_b1, GitHubApiWrapper.Client,
+  github_personal_access_token: System.get_env("github_personal_access_token")
+

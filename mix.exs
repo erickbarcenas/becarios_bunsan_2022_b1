@@ -28,7 +28,7 @@ defmodule BecariosBunsan2022B1.MixProject do
       {:excoveralls, "~> 0.10", only: :test},
       {:sweet_xml, "~> 0.7.2"},
       {:libgraph, "~> 0.13.3"},
-      {:httpotion, "~> 3.1.0"},
+      # {:httpotion, "~> 3.1.0"},
       {:poison, "~> 5.0"},
       {:tzdata, "~> 1.1"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},

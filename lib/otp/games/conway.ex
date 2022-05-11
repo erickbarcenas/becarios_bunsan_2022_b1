@@ -186,13 +186,11 @@ defmodule Conway.Game do
     "random 15x15": {60, 15}
   }
 
-  
-    #:random.seed(:erlang.now())
-#
-    #for {name, {steps, data}} <- patterns do
-    #  data
-    #  |> Conway.Grid.new()
-    #  |> Conway.TerminalGame.play(name, steps)
-    #end
-  
+  # :random.seed(:erlang.now())
+  #
+  # for {name, {steps, data}} <- patterns do
+  #  data
+  #  |> Conway.Grid.new()
+  #  |> Conway.TerminalGame.play(name, steps)
+  # end
 end
