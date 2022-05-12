@@ -34,7 +34,8 @@ defmodule BecariosBunsan2022B1.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
-      {:jason, ">= 1.0.0"}
+      {:jason, ">= 1.0.0"},
+      {:amqp, "~> 3.1"}
     ]
   end
 end
