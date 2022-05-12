@@ -13,7 +13,7 @@ defmodule Github do
   #     unquote(Macro.escape(repo))
   #   end
   # end)
-# 
+  # 
   # def go(repo) do
   #   url = apply(__MODULE__, repo, [])["html_url"]
   #   IO.puts("Launching browser to #{url}...")
