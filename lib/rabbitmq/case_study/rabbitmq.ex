@@ -1,16 +1,35 @@
 defmodule RabbitMQ.System do
+  use AMQP
+
   @doc """
   Creates the exchaange, the queues and their bindings.
   If the exchange and queues already exist, does nothing.
   """
-  def setup(exchange_name, queue_names), do: :ok
+  def setup(exchange_name, queue_names) do
+    connection = Connection.open() |> elem(2)
+    channel_a = Channel.open(connection) |> elem(2)
+    
+    Exchange.declare(channel_a, exchange_name)
+
+     
+    Enum.map(queue_names, fn queue -> 
+      n_queue = AMQP.Queue.declare(channel_a, queue)
+      |> elem(2)
+      |> Map.get(:queue)
+      
+      Queue.bind(channel_a, exchange_name, n_queue)
+    end)
+    
+  end
 end
 
 defmodule RabbitMQ.Producer do
   @doc """
   Sends n messages with payload 'msg' and the given routing key.
   """
-  def send(exchange, routing_key, msg, n), do: :ok
+  def send(exchange, routing_key, msg, n) do
+    
+  end
 end
 
 defmodule RabbitMQ.Consumer do
@@ -20,12 +39,16 @@ defmodule RabbitMQ.Consumer do
   Example:
     iex> {:ok, pid} = Consumer.start("orders")
   """
-  def start(queue_name), do: :ok
+  def start(queue_name) do
+    
+  end
 
   @doc """
   Stops the given consumer.
   Example:
     iex> Consumer.stop("orders")
   """
-  def stop(pid), do: :ok
+  def stop(pid) do
+    
+  end
 end

@@ -12,9 +12,9 @@
   end
 
 message = 
-  case raw_message do
-    []    -> "Hello World!"
-    words -> Enum.join(words, " ")
+case raw_message do
+  []    -> "Hello World!"
+  words -> Enum.join(words, " ")
   end
 
 AMQP.Exchange.declare(channel, "direct_logs", :direct)
