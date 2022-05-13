@@ -1,34 +1,41 @@
 defmodule RabbitMQ.System do
+  require Logger
   use AMQP
 
   @doc """
-  Creates the exchaange, the queues and their bindings.
+  Creates the exchange, the queues and their bindings.
   If the exchange and queues already exist, does nothing.
   """
   def setup(exchange_name, queue_names) do
     connection = Connection.open() |> elem(2)
-    channel_a = Channel.open(connection) |> elem(2)
-    
-    Exchange.declare(channel_a, exchange_name)
-
-     
-    Enum.map(queue_names, fn queue -> 
-      n_queue = AMQP.Queue.declare(channel_a, queue)
-      |> elem(2)
-      |> Map.get(:queue)
-      
-      Queue.bind(channel_a, exchange_name, n_queue)
+    channel = Channel.open(connection) |> elem(2)
+    Exchange.declare(channel, exchange_name)
+    Enum.each(queue_names, fn queue ->
+      Queue.declare(channel, queue)
+      Queue.bind(channel, queue, exchange_name, routing_key: queue)
     end)
-    
+    Logger.info(
+      "Exchange #{exchange_name} has been associated with the following queues: #{queue_names}"
+    )
+    Connection.close(connection)
   end
 end
 
 defmodule RabbitMQ.Producer do
+  require Logger
+  use AMQP
+
   @doc """
   Sends n messages with payload 'msg' and the given routing key.
   """
   def send(exchange, routing_key, msg, n) do
-    
+    connection = Connection.open() |> elem(2)
+    channel = Channel.open(connection) |> elem(2)
+    Enum.each(1..n, fn _ ->
+      Basic.publish(channel, exchange, routing_key, msg)
+    end)
+    Logger.info("Message was sent: '#{msg}'' to routing: #{routing_key}")
+    Connection.close(connection)
   end
 end
 
@@ -40,7 +47,23 @@ defmodule RabbitMQ.Consumer do
     iex> {:ok, pid} = Consumer.start("orders")
   """
   def start(queue_name) do
-    
+    spawn(fn -> listen_messages(queue_name) end)
+  end
+
+  defp listen_messages(queue_name) do
+    connection = Connection.open() |> elem(2)
+    channel = Channel.open(connection) |> elem(2)
+    Basic.consume(channel, queue_name, nil, no_ack: true)
+
+    receive do
+      {:deliver, payload} ->
+        Connection.close(connection)
+        listen_messages(queue_name)
+
+      {:stop} ->
+        Connection.close(connection)
+        :ok
+    end
   end
 
   @doc """
@@ -49,6 +72,6 @@ defmodule RabbitMQ.Consumer do
     iex> Consumer.stop("orders")
   """
   def stop(pid) do
-    
+    send(pid, {:stop})
   end
 end

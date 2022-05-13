@@ -5,7 +5,6 @@
 # iex> AMQP.Connection.open("amqp://guest:guest@localhost")
 # {:ok, %AMQP.Connection{}}
 
-
 {:ok, connection} = AMQP.Connection.open()
 {:ok, channel_a} = AMQP.Channel.open(connection)
 
