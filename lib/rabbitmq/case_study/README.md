@@ -71,14 +71,21 @@ iex> RabbitMQ.Producer.send("rabbitmq_project", "orders", "{order_id: 1, items: 
 
 ```elixir
 iex> payments_1 = RabbitMQ.Consumer.start("payments")
-#PID<0.345.0>
+
 ```
 
 ```elixir
 iex> orders_1 = RabbitMQ.Consumer.start("orders")
-#PID<0.360.0>
+
 ```
 
+4. Stopping queues
+
+```elixir
+iex> RabbitMQ.Consumer.stop(payments_1)
+
+iex> RabbitMQ.Consumer.stop(orders_1)
+```
 
 ## Another Examples
 1. Se crea la conexión

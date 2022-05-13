@@ -14,7 +14,7 @@ defmodule RabbitMQ.Producer do
       end)
       
   
-      Logger.info("Message was sent: '#{msg}' to routing: #{routing_key}")
+      Logger.info("By '#{routing_key}' (#{n} times) was sent: #{msg}")
       Connection.close(connection)
     end
   end

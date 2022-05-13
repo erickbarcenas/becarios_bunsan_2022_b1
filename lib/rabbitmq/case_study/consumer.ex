@@ -17,11 +17,11 @@ defmodule RabbitMQ.Consumer do
       Basic.consume(channel, queue_name, nil, no_ack: true)
   
       receive do
-        {:basic_deliver, payload, _meta} ->
-          IO.puts("#{inspect(self())} receives: #{payload} from #{queue_name}")
+        { :basic_deliver, payload, _meta } ->
+          IO.puts("#{inspect(self())} - #{queue_name} receives: #{payload}")
           listen_messages(queue_name, connection, channel)
   
-        {:stop} ->
+        { :stop } ->
           Connection.close(connection)
           :ok
       end
@@ -33,7 +33,7 @@ defmodule RabbitMQ.Consumer do
       iex> Consumer.stop("orders")
     """
     def stop(pid) do
-      send(pid, {:stop})
+      send(pid, { :stop })
     end
   end
   
