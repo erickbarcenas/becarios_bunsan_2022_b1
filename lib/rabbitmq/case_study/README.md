@@ -9,19 +9,19 @@ Dashboard data is shown below:
 
 Connections
 
-![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/connections.png)
+![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/connections.jpeg)
 
 Channels
 
-![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/connections.png)
+![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/connections.jpeg)
 
 Exchanges
 
-![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/exchanges.png)
+![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/exchanges.jpeg)
 
 Queues
 
-![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/queues.png)
+![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/queues.jpeg)
 
 ```
 Username: admin
