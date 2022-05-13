@@ -1,5 +1,39 @@
 # Case Study
 
+It is requested to implement the following architecture:
+
+![Architecture](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/ecommerce.png)
+
+
+Dashboard data is shown below:
+
+Connections
+
+![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/connections.png)
+
+Channels
+
+![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/connections.png)
+
+Exchanges
+
+![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/exchanges.png)
+
+Queues
+
+![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/queues.png)
+
+```
+Username: admin
+Password: Secr3t
+```
+The dashboard can be installed following the following tutorial:
+https://citizix.com/how-to-install-rabbitmq-in-ubuntu-20-04/
+
+
+
+
+# Examples
 1. Se crea la conexión
 ```elixir
 iex(1)> {:ok, connection} = AMQP.Connection.open()
