@@ -1,4 +1,7 @@
-# Case Study
+# RabbitMQ (system integration tool)
+
+Software where queues can be defined, applications can connect to said queues and put/read messages on them ().
+
 
 It is requested to implement the following architecture:
 
@@ -40,11 +43,21 @@ Queues
 
 ```
 iex> exchange_name = "rabbitmq_project"
+"rabbitmq_project"
+
 iex> queue_names = ["payments", "orders"]
+["payments", "orders"]
+
 iex> RabbitMQ.System.setup(exchange_name, queue_names)
+10:12:11.277 [info]  Exchange 'rabbitmq_project'' has been associated with the following queues:
+ 
+10:12:11.277 [info]  payments
+
+10:12:11.277 [info]  orders
+:ok
 ```
 
-2.
+2. 
 
 3.
 

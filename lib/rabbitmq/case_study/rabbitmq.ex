@@ -14,9 +14,8 @@ defmodule RabbitMQ.System do
       Queue.declare(channel, queue)
       Queue.bind(channel, queue, exchange_name, routing_key: queue)
     end)
-    Logger.info(
-      "Exchange #{exchange_name} has been associated with the following queues: #{queue_names}"
-    )
+    Logger.info("Exchange '#{exchange_name}' has been associated with the following queues:")
+    queue_names |> Enum.each(&Logger.info(&1))
     Connection.close(connection)
   end
 end
