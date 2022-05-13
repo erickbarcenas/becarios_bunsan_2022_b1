@@ -40,6 +40,7 @@ defmodule RabbitMQ.Producer do
 end
 
 defmodule RabbitMQ.Consumer do
+  use AMQP
   @doc """
   Creates a process that listens for messages on the given queue.
   When a message arrives, it writes to the log the pid, queue_name and msg.
