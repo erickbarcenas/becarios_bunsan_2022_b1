@@ -7,8 +7,8 @@ defmodule RabbitMQ.System do
   If the exchange and queues already exist, does nothing.
   """
   def setup(exchange_name, queue_names) do
-    connection = Connection.open() |> elem(2)
-    channel = Channel.open(connection) |> elem(2)
+    connection = Connection.open() |> elem(1)
+    channel = Channel.open(connection) |> elem(1)
     Exchange.declare(channel, exchange_name)
     Enum.each(queue_names, fn queue ->
       Queue.declare(channel, queue)
@@ -29,8 +29,8 @@ defmodule RabbitMQ.Producer do
   Sends n messages with payload 'msg' and the given routing key.
   """
   def send(exchange, routing_key, msg, n) do
-    connection = Connection.open() |> elem(2)
-    channel = Channel.open(connection) |> elem(2)
+    connection = Connection.open() |> elem(1)
+    channel = Channel.open(connection) |> elem(1)
     Enum.each(1..n, fn _ ->
       Basic.publish(channel, exchange, routing_key, msg)
     end)
@@ -52,8 +52,8 @@ defmodule RabbitMQ.Consumer do
   end
 
   defp listen_messages(queue_name) do
-    connection = Connection.open() |> elem(2)
-    channel = Channel.open(connection) |> elem(2)
+    connection = Connection.open() |> elem(1)
+    channel = Channel.open(connection) |> elem(1)
     Basic.consume(channel, queue_name, nil, no_ack: true)
 
     receive do

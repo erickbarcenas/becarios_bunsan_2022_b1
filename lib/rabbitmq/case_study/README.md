@@ -36,6 +36,21 @@ Queues
 
 ## Final state
 
+1.  Creates the exchange, the queues and their bindings.
+
+```
+iex> exchange_name = "rabbitmq_project"
+iex> queue_names = ["payments", "orders"]
+iex> RabbitMQ.System.setup(exchange_name, queue_names)
+```
+
+2.
+
+3.
+
+4.
+
+5.
 
 
 
