@@ -4,7 +4,17 @@ It is requested to implement the following architecture:
 
 ![Architecture](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/ecommerce.png)
 
+Settings
 
+```
+Username: admin
+Password: Secr3t
+```
+The dashboard can be installed following the following tutorial:
+https://citizix.com/how-to-install-rabbitmq-in-ubuntu-20-04/
+
+
+## Initial state
 Dashboard data is shown below:
 
 Connections
@@ -23,17 +33,14 @@ Queues
 
 ![Dashboard](https://github.com/erickbarcenas/becarios_bunsan_2022_b1/blob/main/lib/rabbitmq/case_study/imgs/initial_state/queues.jpeg)
 
-```
-Username: admin
-Password: Secr3t
-```
-The dashboard can be installed following the following tutorial:
-https://citizix.com/how-to-install-rabbitmq-in-ubuntu-20-04/
+
+## Final state
 
 
 
 
-# Examples
+
+## Another Examples
 1. Se crea la conexión
 ```elixir
 iex(1)> {:ok, connection} = AMQP.Connection.open()

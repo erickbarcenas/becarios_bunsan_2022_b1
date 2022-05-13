@@ -56,7 +56,7 @@ defmodule RabbitMQ.Consumer do
     Basic.consume(channel, queue_name, nil, no_ack: true)
 
     receive do
-      {:deliver, payload} ->
+      {:deliver} ->
         Connection.close(connection)
         listen_messages(queue_name)
 
