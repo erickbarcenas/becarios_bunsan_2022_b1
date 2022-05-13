@@ -18,8 +18,7 @@ defmodule RabbitMQ.Consumer do
   
       receive do
         {:basic_deliver, payload, _meta} ->
-          IO.puts("#{inspect(self())} just got #{payload} from #{queue_name}")
-          Connection.close(connection)
+          IO.puts("#{inspect(self())} receives: #{payload} from #{queue_name}")
           listen_messages(queue_name, connection, channel)
   
         {:stop} ->

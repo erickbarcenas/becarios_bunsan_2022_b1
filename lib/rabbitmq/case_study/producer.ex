@@ -12,6 +12,7 @@ defmodule RabbitMQ.Producer do
       Enum.each(1..n, fn _ ->
         Basic.publish(channel, exchange, routing_key, msg)
       end)
+      
   
       Logger.info("Message was sent: '#{msg}' to routing: #{routing_key}")
       Connection.close(connection)
