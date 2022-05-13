@@ -9,7 +9,8 @@ defmodule RabbitMQ.System do
   def setup(exchange_name, queue_names) do
     connection = Connection.open() |> elem(1)
     channel = Channel.open(connection) |> elem(1)
-    Exchange.declare(channel, exchange_name)
+
+    Exchange.declare(channel, exchange_name, :direct)
     Enum.each(queue_names, fn queue ->
       Queue.declare(channel, queue)
       Queue.bind(channel, queue, exchange_name, routing_key: queue)
@@ -33,7 +34,7 @@ defmodule RabbitMQ.Producer do
     Enum.each(1..n, fn _ ->
       Basic.publish(channel, exchange, routing_key, msg)
     end)
-    Logger.info("Message was sent: '#{msg}'' to routing: #{routing_key}")
+    Logger.info("Message was sent: '#{msg}' to routing: #{routing_key}")
     Connection.close(connection)
   end
 end

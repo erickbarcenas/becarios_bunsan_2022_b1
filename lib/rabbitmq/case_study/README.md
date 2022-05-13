@@ -41,14 +41,9 @@ Queues
 
 1.  Creates the exchange, the queues and their bindings.
 
-```
-iex> exchange_name = "rabbitmq_project"
-"rabbitmq_project"
+```elixir
 
-iex> queue_names = ["payments", "orders"]
-["payments", "orders"]
-
-iex> RabbitMQ.System.setup(exchange_name, queue_names)
+iex> RabbitMQ.System.setup("rabbitmq_project", ["payments", "orders"])
 10:12:11.277 [info]  Exchange 'rabbitmq_project'' has been associated with the following queues:
  
 10:12:11.277 [info]  payments
@@ -57,15 +52,32 @@ iex> RabbitMQ.System.setup(exchange_name, queue_names)
 :ok
 ```
 
-2. 
+2. The producer is created
 
-3.
+```elixir
+iex> RabbitMQ.Producer.send("rabbitmq_project", "payments", "{order_id: 1, amount: 100}", 5)
+10:42:32.178 [info]  Message was sent: '{order_id: 1, amount: 100}' to routing: payments
+:ok
+```
 
-4.
+```elixir
+iex> RabbitMQ.Producer.send("rabbitmq_project", "orders", "{order_id: 1, items: [{3, 1}, {2, 2}]}", 5)
+10:44:51.087 [info]  Message was sent: '{order_id: 1, items: [{3, 1}, {2, 2}]}' to routing: orders
+:ok
+```
 
-5.
 
+3. The consumer is created
 
+```elixir
+iex> payments_1 = RabbitMQ.Consumer.start("payments")
+#PID<0.345.0>
+```
+
+```elixir
+iex> orders_1 = RabbitMQ.Consumer.start("orders")
+#PID<0.360.0>
+```
 
 
 ## Another Examples
